@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 40px;
+            padding: 20px;
+            background: lightblue;
+            color: black;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .home-container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #5c67f2;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #4a54e1;
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            background: #ddd;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="home" class="home-container">
+        <h1>Welcome to Student Planner 📚</h1>
+        <p>Organize your tasks and exam schedule efficiently.</p>
+        <button onclick="showTasks()">📋 Manage Tasks</button>
+        <button onclick="showExams()">📅 Manage Exam Reminders</button>
+    </div>
+    
+    <div id="tasksPage" class="container" style="display: none;">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Add a task...">
+        <input type="date" id="taskDate">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+        <button onclick="goHome()">Back to Home</button>
+    </div>
+    
+    <div id="examsPage" class="container" style="display: none;">
+        <h2>Exam Reminders</h2>
+        <input type="text" id="examInput" placeholder="Exam subject...">
+        <input type="date" id="examDate">
+        <button onclick="addExam()">Add Exam</button>
+        <ul id="examList"></ul>
+        <button onclick="goHome()">Back to Home</button>
+    </div>
+    
+    <script>
+        function showTasks() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('tasksPage').style.display = 'block';
+            document.getElementById('examsPage').style.display = 'none';
+        }
+        
+        function showExams() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('tasksPage').style.display = 'none';
+            document.getElementById('examsPage').style.display = 'block';
+        }
+        
+        function goHome() {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('tasksPage').style.display = 'none';
+            document.getElementById('examsPage').style.display = 'none';
+        }
+        
+        function addTask() {
+            let task = document.getElementById("taskInput").value;
+            let date = document.getElementById("taskDate").value;
+            if (task && date) {
+                document.getElementById("taskList").innerHTML += `<li><input type='checkbox'> ${task} - ${date}</li>`;
+                document.getElementById("taskInput").value = "";
+                document.getElementById("taskDate").value = "";
+            }
+        }
+        
+        function addExam() {
+            let exam = document.getElementById("examInput").value;
+            let date = document.getElementById("examDate").value;
+            if (exam && date) {
+                document.getElementById("examList").innerHTML += `<li>${exam} - ${date}</li>`;
+                document.getElementById("examInput").value = "";
+                document.getElementById("examDate").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
